@@ -25,6 +25,22 @@ The project focuses on request lifecycle interception, concurrency-safe in-memor
 
 ---
 
+## Application Request Flow
+
+The rate-limiting logic is enforced **before** any controller is executed by intercepting incoming HTTP requests at the servlet filter level.
+
+### Request Lifecycle
+
+Client Request
+↓
+RateLimitFilter (OncePerRequestFilter)
+↓
+RateLimiterService.validateRequest()
+↓
+[ Allowed ] ─────────── Controller (/api/test) ─ 200 OK
+│
+└─ [ Blocked ] ─── 429 Too Many Requests
+
 ## API Overview
 
 * **GET** `/api/test` — Test endpoint protected by rate limiting
