@@ -31,6 +31,7 @@ The rate-limiting logic is enforced **before** any controller is executed by int
 
 ### Request Lifecycle
 
+```
 Client Request
 ↓
 RateLimitFilter (OncePerRequestFilter)
@@ -40,6 +41,7 @@ RateLimiterService.validateRequest()
 [ Allowed ] ─────────── Controller (/api/test) ─ 200 OK
 │
 └─ [ Blocked ] ─── 429 Too Many Requests
+```
 
 ## API Overview
 
